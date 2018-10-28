@@ -11,6 +11,9 @@ To explore how the Linux kernel is compiled, this article will dive into the Kco
 ### Kconfig
 
 The first step in building a kernel is always configuration. Kconfig helps make the Linux kernel highly modular and customizable. Kconfig offers the user many config targets:
+
+|  |  |
+|---|---|
 | config         | Update current config utilizing a line-oriented program                         |
 | nconfig        | Update current config utilizing a ncurses menu-based program                    |
 | menuconfig     | Update current config utilizing a menu-based program                            |
@@ -31,6 +34,7 @@ The first step in building a kernel is always configuration. Kconfig helps make 
 | kvmconfig      | Enable additional options for KVM guest kernel support                          |
 | xenconfig      | Enable additional options for xen dom0 and guest kernel support                 |
 | tinyconfig     | Configure the tiniest possible kernel                                           |
+| | |
 
 I think **menuconfig** is the most popular of these targets. The targets are processed by different host programs, which are provided by the kernel and built during kernel building. Some targets have a GUI (for the user's convenience) while most don't. Kconfig-related tools and source code reside mainly under **scripts/kconfig/** in the kernel source. As we can see from **scripts/kconfig/Makefile** , there are several host programs, including **conf** , **mconf** , and **nconf**. Except for **conf** , each of them is responsible for one of the GUI-based config targets, so, **conf** deals with most of them.
 
