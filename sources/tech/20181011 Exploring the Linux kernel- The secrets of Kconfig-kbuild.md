@@ -1,17 +1,22 @@
 translating by leemeans
 Exploring the Linux kernel: The secrets of Kconfig/kbuild
+探索Linux内核：Kconfig/kbuild的奥秘
 ======
 Dive into understanding how the Linux config/build system works.
+深入理解Linuxconfig/build系统如何工作。
 
 ![](https://opensource.com/sites/default/files/styles/image-full-size/public/lead-images/compass_map_explore_adventure.jpg?itok=ecCoVTrZ)
 
 The Linux kernel config/build system, also known as Kconfig/kbuild, has been around for a long time, ever since the Linux kernel code migrated to Git. As supporting infrastructure, however, it is seldom in the spotlight; even kernel developers who use it in their daily work never really think about it.
+自从内核代码迁移到Git,被称为Kconfig/kbuild的Linux内核config/build系统已经出现了很久了。但是作为支持组件，它极少成为(人们)的焦点，即使是在日常工作中使用此系统的内核开发者也没有真正理解它。
 
 To explore how the Linux kernel is compiled, this article will dive into the Kconfig/kbuild internal process, explain how the .config file and the vmlinux/bzImage files are produced, and introduce a smart trick for dependency tracking.
+为了探索Linux内核是如何被编译的，此文将会深入Kconfig/kbuild内部流程，解释.config文件和vmlinux/bzImage是如何产生的，并介绍一个用于依赖跟踪的聪明的小技巧。
 
 ### Kconfig
 
 The first step in building a kernel is always configuration. Kconfig helps make the Linux kernel highly modular and customizable. Kconfig offers the user many config targets:
+构建一个内核的第一步永远是配置。Kconfig使得Linux内核高度模块化和可定制话。Kconfig为用户提供了多个配置目标:
 
 |  |  |
 |---|---|
