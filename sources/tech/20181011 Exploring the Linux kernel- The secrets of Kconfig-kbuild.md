@@ -20,16 +20,16 @@ The first step in building a kernel is always configuration. Kconfig helps make 
 
 |  |  |
 |---|---|
-| config         | Update current config utilizing a line-oriented program                         |
-| nconfig        | Update current config utilizing a ncurses menu-based program                    |
-| menuconfig     | Update current config utilizing a menu-based program                            |
-| xconfig        | Update current config utilizing a Qt-based frontend                             |
-| gconfig        | Update current config utilizing a GTK+ based frontend                           |
-| oldconfig      | Update current config utilizing a provided .config as base                      |
-| localmodconfig | Update current config disabling modules not loaded                              |
-| localyesconfig | Update current config converting local mods to core                             |
-| defconfig      | New config with default from Arch-supplied defconfig                            |
-| savedefconfig  | Save current config as ./defconfig (minimal config)                             |
+| config         | Update current config utilizing a line-oriented program通过命令行程序更新当前config选项                         |
+| nconfig        | Update current config utilizing a ncurses menu-based program通过基于ncurses菜单程序更新当前config选项                    |
+| menuconfig     | Update current config utilizing a menu-based program通过基于菜单程序更新当前config选项                            |
+| xconfig        | Update current config utilizing a Qt-based frontend通过基于Qt前端更新当前config选项                             |
+| gconfig        | Update current config utilizing a GTK+ based frontend通过基于GTK+前端更新当前config选项                           |
+| oldconfig      | Update current config utilizing a provided .config as base使用提供的.config文件作为基础更新当前config选项                      |
+| localmodconfig | Update current config disabling modules not loaded禁用未加载的模块并更新当前config                              |
+| localyesconfig | Update current config converting local mods to core将本地模块编译进内核并更新当前config                             |
+| defconfig      | New config with default from Arch-supplied defconfig根据架构提供的defconfig创建新的config                            |
+| savedefconfig  | Save current config as ./defconfig (minimal config)将当前的config保存为./defconfig最小config                             |
 | allnoconfig    | New config where all options are answered with 'no'                             |
 | allyesconfig   | New config where all options are accepted with 'yes'                            |
 | allmodconfig   | New config selecting modules when possible                                      |
