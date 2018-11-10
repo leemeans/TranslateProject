@@ -30,29 +30,38 @@ The first step in building a kernel is always configuration. Kconfig helps make 
 | localyesconfig | Update current config converting local mods to core将本地模块编译进内核并更新当前config                             |
 | defconfig      | New config with default from Arch-supplied defconfig根据架构提供的defconfig创建新的config                            |
 | savedefconfig  | Save current config as ./defconfig (minimal config)将当前的config保存为./defconfig最小config                             |
-| allnoconfig    | New config where all options are answered with 'no'                             |
-| allyesconfig   | New config where all options are accepted with 'yes'                            |
-| allmodconfig   | New config selecting modules when possible                                      |
-| alldefconfig   | New config with all symbols set to default                                      |
-| randconfig     | New config with a random answer to all options                                  |
-| listnewconfig  | List new options                                                                |
-| olddefconfig   | Same as oldconfig but sets new symbols to their default value without prompting |
-| kvmconfig      | Enable additional options for KVM guest kernel support                          |
-| xenconfig      | Enable additional options for xen dom0 and guest kernel support                 |
-| tinyconfig     | Configure the tiniest possible kernel                                           |
+| allnoconfig    | New config where all options are answered with 'no'所有选项设置为no的新config                             |
+| allyesconfig   | New config where all options are accepted with 'yes'所有选项设置为yes的新config                            |
+| allmodconfig   | New config selecting modules when possible选中可能的模块的新config                                      |
+| alldefconfig   | New config with all symbols set to default所有符号设为默认的新config                                      |
+| randconfig     | New config with a random answer to all options对所有选项设置随机值的工作新config                                  |
+| listnewconfig  | List new options列出新选项                                                                |
+| olddefconfig   | Same as oldconfig but sets new symbols to their default value without prompting和oldconfig相同但是会自动设置其新符号的默认值 |
+| kvmconfig      | Enable additional options for KVM guest kernel support打开额外的KVM guest内核支持                          |
+| xenconfig      | Enable additional options for xen dom0 and guest kernel support启用xen dom0额外选项和guest支持                 |
+| tinyconfig     | Configure the tiniest possible kernel配置最小内核                                           |
 | | |
 
 I think **menuconfig** is the most popular of these targets. The targets are processed by different host programs, which are provided by the kernel and built during kernel building. Some targets have a GUI (for the user's convenience) while most don't. Kconfig-related tools and source code reside mainly under **scripts/kconfig/** in the kernel source. As we can see from **scripts/kconfig/Makefile** , there are several host programs, including **conf** , **mconf** , and **nconf**. Except for **conf** , each of them is responsible for one of the GUI-based config targets, so, **conf** deals with most of them.
 
+我觉得在这些目标选项中**menuconfig**是最流行的。目标由内核在内核构建过程中编译的不同的宿主程序进行处理。虽然大多数没有可还是有些目标提供了GUI(根据用户自己的喜好)。Kconfig相关的工具和对应源代码主要放在内核源下的 **scripts/kconfig/** 。我们可以从 **scripts/kconfig/Makefile** 看到有很多宿主程序，包括 **conf** , **mconf** , 和 **nconf** 等。除了 **conf** 之外，这些程序每个都对应着一个基于GUI的config目标，因此， **conf** 处理了大部分的工作。
+
 Logically, Kconfig's infrastructure has two parts: one implements a [new language][1] to define the configuration items (see the Kconfig files under the kernel source), and the other parses the Kconfig language and deals with configuration actions.
 
+从逻辑上讲，Kconfig的基础构件有两个部分: 一部分实现一个 [新语言][1] 来定义配置条目(参见内核源下的Kconfig文件)，另一部分解析Kconfig语言并处理配置行为。
+
 Most of the config targets have roughly the same internal process (shown below):
+大多数config目标拥有大致相同的内部程序(如下图):
 
 ![](https://opensource.com/sites/default/files/uploads/kconfig_process.png)
 
 Note that all configuration items have a default value.
 
+注意所有的配置条目都有一个默认值。
+
 The first step reads the Kconfig file under source root to construct an initial configuration database; then it updates the initial database by reading an existing configuration file according to this priority:
+
+第一步读取源目录根路径的Kconfig文件来构建一个初始配置数据库;然后按照下列优先级读取一个已存在的配置文件来更新初始化的数据库。
 
 > .config
 >  /lib/modules/$(shell,uname -r)/.config
@@ -62,6 +71,8 @@ The first step reads the Kconfig file under source root to construct an initial 
 >  arch/$(ARCH)/defconfig
 
 If you are doing GUI-based configuration via **menuconfig** or command-line-based configuration via **oldconfig** , the database is updated according to your customization. Finally, the configuration database is dumped into the .config file.
+
+如果你正通过 **menuconfig** 进行基于GUI的配置或者通过
 
 But the .config file is not the final fodder for kernel building; this is why the **syncconfig** target exists. **syncconfig** used to be a config target called **silentoldconfig** , but it doesn't do what the old name says, so it was renamed. Also, because it is for internal use (not for users), it was dropped from the list.
 
