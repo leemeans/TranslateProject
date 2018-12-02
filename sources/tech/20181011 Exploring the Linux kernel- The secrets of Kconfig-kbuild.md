@@ -72,34 +72,42 @@ The first step reads the Kconfig file under source root to construct an initial 
 
 If you are doing GUI-based configuration via **menuconfig** or command-line-based configuration via **oldconfig** , the database is updated according to your customization. Finally, the configuration database is dumped into the .config file.
 
-如果你正通过 **menuconfig** 进行基于GUI的配置或者通过
+如果你正通过 **menuconfig** 进行基于GUI的配置或者通过**oldconfig**进行基于命令行的配置工作，配置数据库根据将会根据你的配置进行更新。最终，配置数据库将会被导出到.config文件中。
 
 But the .config file is not the final fodder for kernel building; this is why the **syncconfig** target exists. **syncconfig** used to be a config target called **silentoldconfig** , but it doesn't do what the old name says, so it was renamed. Also, because it is for internal use (not for users), it was dropped from the list.
 
+但是.config文件不是内核构建的最终素材;所以有**syncconfig**目标的存在。**syncconfig**曾经是被叫做**silentoldconfig**的目标，但是它所做的任务并非其名字所表示的那样，因此它被改了名字。同样地，因为它是内部使用的文件(不是给用户的)，因此它被从列表中丢弃了。
+
 Here is an illustration of what **syncconfig** does:
+
+下面展示了**syncconfig**所做的事情:
 
 ![](https://opensource.com/sites/default/files/uploads/syncconfig.png)
 
 **syncconfig** takes .config as input and outputs many other files, which fall into three categories:
 
-  * **auto.conf & tristate.conf** are used for makefile text processing. For example, you may see statements like this in a component's makefile:
+**syncconfig**使用.config作为输入并输出很多其他文件，这些文件可以分为以下三个目录:
+
+  * **auto.conf & tristate.conf** are used for makefile text processing. For example, you may see statements like this in a component's makefile:被用于makefile文本处理。例如你可能会在makefile的一个部分中看到类似下面的语句:
 
 ```
      obj-$(CONFIG_GENERIC_CALIBRATE_DELAY) += calibrate.o
 ```
 
-  * **autoconf.h** is used in C-language source files.
+  * **autoconf.h** is used in C-language source files.被用在C语言源文件中。
 
-  * Empty header files under **include/config/** are used for configuration-dependency tracking during kbuild, which is explained below.
-
-
+  * Empty header files under **include/config/** are used for configuration-dependency tracking during kbuild, which is explained below.在**include/config/**下的空白头文件在kbuild过程中配置依赖跟踪的，关于这个过程，后文有解释。
 
 
-After configuration, we will know which files and code pieces are not compiled.
+
+
+After configuration, we will know which files and code pieces are not compiled.在配置之后，我们将会知道哪些文件和代码片是没有被编译的。
 
 ### kbuild
 
 Component-wise building, called _recursive make_ , is a common way for GNU `make` to manage a large project. Kbuild is a good example of recursive make. By dividing source files into different modules/components, each component is managed by its own makefile. When you start building, a top makefile invokes each component's makefile in the proper order, builds the components, and collects them into the final executive.
+
+分量方式构建，又名_递归make_，是一种GNU `make` 管理大型工程的普遍方法。kbuild就是一个递归 make 的好例子。通过将源文件分为不同的模块/部分，每个部分都由其自身的makefile管理。
 
 Kbuild refers to different kinds of makefiles:
 
