@@ -1,4 +1,5 @@
-translating by leemeans
+Translating by Jamskr
+
 Exploring the Linux kernel: The secrets of Kconfig/kbuild
 探索Linux内核：Kconfig/kbuild的奥秘
 ======
