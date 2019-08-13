@@ -71,8 +71,9 @@ Those three questions can tell you a lot about whether you treat documentation a
 这种经常不屑一顾的态度在行业中是很常见的。根据[GitHub 2017 Open Source Survey][1]，大多数开源工程的最大问题是不完整的或者令人困惑的文档。而又有多少这些工程招募技术写者来提高这些呢？任务中的我们又有多少会带一个技术写者进入团队帮忙改进文档呢？
 This often-dismissive attitude is pervasive in the industry. According to the [GitHub 2017 Open Source Survey][1], the number-one problem with most open source projects is incomplete or confusing documentation. But how many of those projects solicit technical writers to help improve that? How many of us in operations have a technical writer we bring in to help write or improve our documentation?
 
-### Practice makes (closer to) perfect
+### Practice makes (closer to) perfect熟能生巧
 
+这并不意味着只有技术写者可以写出好文档，写作和编辑和其他技能没什么两样：只要去做就一定会有收获，可是却很少有人去做这件事情。那么我们可以采取哪些具体步骤使得文档成为我们的优势而不是某样有就好了的东西呢？
 This isn't to say that only a technical writer can produce good documentation, but writing and editing are skills like any other: We'll only get better at it if we work at it, and too few of us do. What are the concrete steps we can take to make it a real priority, as opposed to a nice-to-have?
 
 For a start, make good documentation a value that your organization champions. Just as reliability needs champions to get prioritized, documentation needs the same thing. Project plans and sprints should include delivering new documentation or updating old documentation, and allocate time for doing so. Make sure people understand that writing good documentation is just as important to their career development as writing good code.
